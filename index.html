@@ -6,7 +6,8 @@
     <style>
       body {
         font-family: sans-serif;
-        background: white;
+        background: #faf671;
+		color: #3e2alf;
         margin: 0;
         padding: 2rem;
       }
@@ -30,6 +31,25 @@
         color: #1a0dab;
         text-decoration: underline;
       }
+	  .viz-button {
+	      display: inline-block;
+	      padding: 12px 20px;
+	      border-radius: 999px;
+	      text-decoration: none;
+	      background: #b87333; /* coffee bronze */
+	      color: white;
+	      font-weight: 600;
+	      font-size: 1rem;
+	      transition: background 0.25s;
+	  }
+
+	  .viz-button:hover {
+	      background: #8b5a2b; /* darker roast */
+	  }
+	  body {
+	      background: #faf6f1 url('https://i.imgur.com/zCYXrQK.png') repeat;
+	      background-size: 200px;
+	  }
     </style>
 </head>
 <body>
@@ -40,9 +60,9 @@
 
         <p><strong>Goals:</strong> This visualization aims to reveal broad patterns in caffeine use across diverse populations and to offer a clear way to explore how these patterns differ among groups of people.</p>
 
-        <p><strong>Intended audience:</strong> This visualization is for anyone who is curious about how their caffeine routine fits into broader patterns. Whether your drink is tea, espresso, soda, or matcha, it offers a way to explore how caffeine connects to stress, sleep, and age among people around the world.</p>
+        <p><strong>Intended Audience:</strong> This visualization is for anyone who is curious about how their caffeine routine fits into broader patterns. Whether your drink is tea, espresso, soda, or matcha, it offers a way to explore how caffeine connects to stress, sleep, and age among people around the world.</p>
 
-        <p><strong>Data sources:</strong> synthetic_coffee_health_10000.csv and coffee_types.csv</p>
+        <p><strong>Data Sources:</strong> synthetic_coffee_health_10000.csv and coffee_types.csv</p>
 
 	 <p>
 	   <a class="viz-button" href="viz.html">
