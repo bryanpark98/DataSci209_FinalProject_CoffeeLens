@@ -250,7 +250,38 @@
             flex-wrap: wrap;
             gap: 4px;
         }
-    </style>
+		.breakdown-card {
+		    padding: 10px 12px;
+		    border-radius: 8px;
+		    border: 1px solid #e5e7eb;
+		    background: #f9fafb;
+		    font-size: 12px;
+		    color: #4b5563;
+		}
+
+		.breakdown-title {
+		    font-weight: 600;
+		    font-size: 12px;
+		    margin-bottom: 4px;
+		}
+
+		.breakdown-chips {
+		    display: flex;
+		    flex-wrap: wrap;
+		    gap: 4px;
+		}
+
+		.breakdown-overlay {
+		    position: absolute;
+		    left: 50%;
+		    bottom: 16px;
+		    transform: translateX(-50%);
+		    max-width: 640px;
+		    width: calc(100% - 40px);
+		    z-index: 2;
+		}
+	</style>
+		
 </head>
 
 <body>
@@ -345,42 +376,73 @@
         </div>
 
         <!-- RIGHT: viz -->
-        <div class="viz-shell">
-            <div class="viz-legend">
-                <div class="viz-legend-title">Head color → Stress level</div>
-                <div class="viz-legend-bar"></div>
-                <div class="viz-legend-ticks">
-                    <span>Low (0%)</span>
-                    <span>Mid (50%)</span>
-                    <span>High (100%)</span>
-                </div>
-            </div>
+	        <!-- RIGHT: viz -->
+	        <div class="viz-shell">
+				<div class="viz-legend">
+				    <div class="viz-legend-title">Head color → Stress level</div>
+				    <div class="viz-legend-bar"></div>
+				    <div class="viz-legend-ticks">
+				        <span>Low (0%)</span>
+				        <span>Mid (50%)</span>
+				        <span>High (100%)</span>
+				    </div>
+				</div>
 
-            <svg id="stage" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid meet">
-                <defs>
-                    <!-- all your defs as before -->
-                </defs>
+			
+	                <svg id="stage" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid meet">
+	                <defs>
+	                    <clipPath id="headClip">
+	                        <circle id="headClipCircle" cx="0" cy="0" r="0" />
+	                    </clipPath>
 
-                <g id="silhouette"></g>
+	                    <filter id="smokeBlur" x="-50%" y="-50%" width="200%" height="200%">
+	                        <feGaussianBlur in="SourceGraphic" stdDeviation="2.2" />
+	                    </filter>
 
-                <g id="overlays">
-                    <rect id="headTint" clip-path="url(#headClip)" x="0" y="0" width="1200" height="900" fill="#dbeafe"
-                        opacity="0.65"></rect>
-                    <g id="particles"></g>
-                    <g id="smoke"></g>
-                </g>
-            </svg>
+	                    <filter id="headGlowBlur" x="-50%" y="-50%" width="200%" height="200%">
+	                        <feGaussianBlur in="SourceGraphic" stdDeviation="22" result="blur" />
+	                        <feMerge>
+	                            <feMergeNode in="blur" />
+	                            <feMergeNode in="SourceGraphic" />
+	                        </feMerge>
+	                    </filter>
 
-            <!-- breakdown card now overlays the SVG at the bottom -->
-            <div id="stressBreakdown" class="breakdown-card breakdown-overlay">
-                <div class="breakdown-title">What’s driving your stress right now?</div>
-                <div id="stressSummaryLine" style="margin-bottom:6px;"></div>
-                <div id="factorList" class="breakdown-chips"></div>
-            </div>
-        </div>
-      
-    </div>
-	
+	                    <filter id="headOuterGlow" x="-70%" y="-70%" width="240%" height="240%"
+	                        color-interpolation-filters="sRGB">
+	                        <feMorphology in="SourceAlpha" operator="dilate" radius="14" result="spread" />
+	                        <feGaussianBlur in="spread" stdDeviation="24" result="blur" />
+	                        <feFlood flood-color="#ff2a2a" flood-opacity="0.4" result="glowColor" />
+	                        <feComposite in="glowColor" in2="blur" operator="in" result="coloredGlow" />
+	                        <feMerge>
+	                            <feMergeNode in="coloredGlow" />
+	                            <feMergeNode in="SourceGraphic" />
+	                        </feMerge>
+	                    </filter>
+
+	                    <linearGradient id="bodyGradient" x1="0" y1="0" x2="0" y2="1">
+	                        <stop offset="0%" stop-color="#db2777" stop-opacity="0.5" />
+	                        <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.35" />
+	                    </linearGradient>
+	                </defs>
+
+	                <g id="silhouette"></g>
+
+	                <g id="overlays">
+	                    <rect id="headTint" clip-path="url(#headClip)" x="0" y="0" width="1200" height="900" fill="#dbeafe"
+	                        opacity="0.65"></rect>
+	                    <g id="particles"></g>
+	                    <g id="smoke"></g>
+	                </g>
+	            </svg>
+	            <div id="stressBreakdown" class="breakdown-card breakdown-overlay">
+	                <div class="breakdown-title">What’s driving your stress right now?</div>
+	                <div id="stressSummaryLine" style="margin-bottom:6px;"></div>
+	                <div id="factorList" class="breakdown-chips"></div>
+	            </div>
+
+	        </div>
+	    </div>
+        
 
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
     <script>
