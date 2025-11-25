@@ -2,25 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Caffeine Relationships: An Interactive Visualization</title>
+    <title>Caffeine Across People</title>
     <style>
       body {
         font-family: sans-serif;
-        background: #faf671;
-		color: #3e2alf;
         margin: 0;
         padding: 2rem;
+        background: #faf6f1 url('https://i.imgur.com/zCYXrQK.png') repeat;
+        background-size: 200px;
       }
 
       .content {
         max-width: 500px;
-        margin: 0;
+        margin: 0 auto;
         line-height: 1.6;
+        background: rgba(255, 255, 255, 0.92);
+        padding: 1.5rem 2rem;
+        border-radius: 12px;
       }
 
       h1 {
         font-size: 2.2rem;
         margin-bottom: 1rem;
+        color: #3e2a1f;
       }
 
       p {
@@ -31,27 +35,25 @@
         color: #1a0dab;
         text-decoration: underline;
       }
-	  .viz-button {
-	      display: inline-block;
-	      padding: 12px 20px;
-	      border-radius: 999px;
-	      text-decoration: none;
-	      background: #b87333; /* coffee bronze */
-	      color: white;
-	      font-weight: 600;
-	      font-size: 1rem;
-	      transition: background 0.25s;
-	  }
 
-	  .viz-button:hover {
-	      background: #8b5a2b; /* darker roast */
-	  }
-	  body {
-	      background: #faf6f1 url('https://i.imgur.com/zCYXrQK.png') repeat;
-	      background-size: 200px;
-	  }
+      .viz-button {
+          display: inline-block;
+          padding: 12px 20px;
+          border-radius: 999px;
+          text-decoration: none;
+          background: #b87333; /* coffee bronze */
+          color: white;
+          font-weight: 600;
+          font-size: 1rem;
+          transition: background 0.25s;
+      }
+
+      .viz-button:hover {
+          background: #8b5a2b; /* darker roast */
+      }
     </style>
 </head>
+
 <body>
     <div class="content">
         <h1>Caffeine Across People</h1>
